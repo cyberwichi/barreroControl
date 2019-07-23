@@ -33,7 +33,7 @@ class HomeController extends Controller
     }
     public function fichar(Request $request)
     {
-        $request->user()->authorizeRoles(['user', 'admin', '']);
+        $request->user()->authorizeRoles(['user', 'admin']);
         
         return view('home2');
     }

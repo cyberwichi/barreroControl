@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::post('/user/{id}/inicio/', 'HorarioController@inicioMiHorario');
+Route::post('/user/{id}/final/', 'HorarioController@finalMiHorario');
 
 
 Route::get('/fichar', 'HomeController@fichar')->name('fichar');
@@ -25,3 +27,4 @@ Route::resource('/users', 'UserController' , ['except' => ['show', 'create', 'st
 Route::resource('/horarios', 'HorarioController');
 Route::get('/turnodelete/{id}', 'HorarioController@destroy')->name('horario.delete');
 Route::get('/userdelete/{id}', 'UserController@destroy')->name('user.delete');
+

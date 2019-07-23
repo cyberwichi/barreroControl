@@ -45,6 +45,11 @@
 
 <body>
     <div id="app">
+            @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+            @endif
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/fichar') }}">
@@ -108,6 +113,9 @@
     </div>
     <div class="footer">
         <p class="copy text-center"><a href="https://github.com/cyberwichi">Cyberwichi 2019</a>   </p>
+        <p class="copy text-center"><a href="https://github.com/cyberwichi/barreroControl">Proyecto barreroControl 0.2.1</a>   </p>
+
+
     </div>
     
 </body>

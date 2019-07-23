@@ -3,13 +3,13 @@
 
 @section('content')
 <div class="container">
-    @if (session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-    @endif
+        
+
+    
 
     @if (auth()->check())
+   
+    
     @if (auth()->user()->hasRole('admin'))
     <div class="row justify-content-center mb-3">
         <div class="col-md-8">
@@ -43,17 +43,18 @@
                 <div class="card-body">
 
 
-                    <form action="  " method="post">
+                <form action="user/{{auth()->user()->id}}/inicio" method="post" @if(session('status')=='Ok turno iniciado') hidden @endif>
 
-                        <input type="datetime" name="datetimeInicio" id="datetimeInicio" value="{{date("d/m/Y H:i")}}"
+                        <input type="datetime" name="datetimeInicio" id="datetimeInicio" value="{{date("Y-m-d H:i")}}"
                             autocomplete>
                         <button class="btn btn-primary" type="submit">Inicio de jornada</button>
+                        
 
                     </form>
-                    <form action="  " method="post" class="mt-3">
+                    <form action="user/{{auth()->user()->id}}/final" method="post" class="mt-3">
 
                         <input type="datetime" name="datetimeFinal" id="datetimeFinal"
-                            value="<?php echo date("d/m/Y H:i");?>" autocomplete>
+                            value="{{date("Y-m-d H:i")}}" autocomplete>
                         <button class="btn btn-primary" type="submit">Final de jornada</button>
 
                     </form>
@@ -224,7 +225,6 @@
                 $.ajax({
                     url: '/api/user/'+{{auth()->user()->id}}+'/semana/'+seman,
                     success: function(respuesta) {
-                        console.log(respuesta);
                         
                        if (respuesta.length>0){
                            respuesta.forEach(element => {

@@ -8,11 +8,7 @@
 
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <div class="container">
-    @if (session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-    @endif
+    
 
     @if (auth()->check())
     @if (auth()->user()->hasRole('admin'))
@@ -93,18 +89,18 @@
                 
               ],
               language:{
-                    "sProcessing":     "Procesando...",
+                    "sProcessing":     "Estamos en ello...",
                     "sLengthMenu":     "Mostrar _MENU_ registros",
-                    "sZeroRecords":    "No se encontraron resultados",
+                    "sZeroRecords":    "Na de na",
                     "sEmptyTable":     "Ningún dato disponible en esta tabla",
                     "sInfo":           "Registros del _START_ al _END_ de  _TOTAL_ registros",
-                    "sInfoEmpty":      "Registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoEmpty":      "Registros del 0 al 0 de 0 registros",
+                    "sInfoFiltered":   "(filtrado de _MAX_ registros)",
                     "sInfoPostFix":    "",
                     "sSearch":         "Buscar:",
                     "sUrl":            "",
                     "sInfoThousands":  ",",
-                    "sLoadingRecords": "Cargando...",
+                    "sLoadingRecords": "Estamos peinandola...",
                     "oPaginate": {
                         "sFirst":    "Primero",
                         "sLast":     "Último",

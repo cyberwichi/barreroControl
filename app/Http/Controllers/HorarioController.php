@@ -4,21 +4,56 @@ namespace App\Http\Controllers;
 
 use App\Horario;
 use App\User;
+use App\Ficha;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Carbon\Carbon;
 
 class HorarioController extends Controller
 {
-    public function miHorario($id, $sem, Response $response) {
+    public function miHorario($id, $sem, Response $response)
+    {
 
         if (request()->ajax()) {
             $nam = Horario::where('user_id', $id)
-            ->where('fecha', $sem)
-            ->get();
-            }
-            $response=$nam;
-            return $response;
+                ->where('fecha', $sem)
+                ->get();
+        }
+        $response = $nam;
+        return $response;
     }
+    public function inicioMiHorario($id, Request $datetimeInicio)
+    {
+
+        
+            $nam = new Ficha;
+            $nam->user_id = $id;      
+            $pepe= date($datetimeInicio->datetimeInicio);            
+            $nam->toque = $pepe;
+            $nam->tipo = "inicio";
+            $nam->save();
+            $datetimeInicio->session()->flash("status", 'Ok turno iniciado');
+
+
+            
+
+        return redirect()->route('fichar')->with($datetimeInicio->session()->get("status"));
+    }
+    public function finalMiHorario($id, Request $datetimeInicio)
+    {
+        $nam = new Ficha;
+        $nam->user_id = $id;      
+        $pepe= date($datetimeInicio->datetimeFinal);            
+        $nam->toque = $pepe;
+        $nam->tipo = "final";
+        $nam->save();
+                    
+   
+
+        return redirect()->route('fichar')->with('status', '');
+    }
+
+
 
 
     /**
@@ -32,15 +67,14 @@ class HorarioController extends Controller
     public function index()
 
     {
-        
-        
+
+
         if (request()->ajax()) {
 
-            return datatables()->of(Horario::latest()->get())                
+            return datatables()->of(Horario::latest()->get())
                 ->addColumn('username', function ($row) {
                     $nam = User::where('id', $row->user_id)->firstOrFail();
                     return $nam->name;
-                   
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<a id="ver' . $row->id . '"  href="' . route('horarios.edit', $row->id) . '" class="edit btn btn-primary btn-sm">Acceder</a>';
@@ -48,10 +82,9 @@ class HorarioController extends Controller
                 })
                 ->rawColumns(['username', 'action'])
                 ->make(true);
-                
         }
 
-        return view('horarios.index');
+        return view('horarios.index')->with(['status'=> 'holaaaa']);
     }
 
     /**
@@ -61,7 +94,7 @@ class HorarioController extends Controller
      */
     public function create()
     {
-        return view('horarios.create')->with(['users'=>User::all()]);
+        return view('horarios.create')->with(['users' => User::all()]);
     }
 
     /**
@@ -72,15 +105,14 @@ class HorarioController extends Controller
      */
     public function store(Request $request)
     {
-        $hora= new Horario;
-        $hora->user_id=$request->get('nombreForm');        
-        $hora->fecha=$request->get('fechaForm');
-        $hora->dia=$request->get('diaForm');
-        $hora->turno=$request->get('turnoForm');
+        $hora = new Horario;
+        $hora->user_id = $request->get('nombreForm');
+        $hora->fecha = $request->get('fechaForm');
+        $hora->dia = $request->get('diaForm');
+        $hora->turno = $request->get('turnoForm');
         $hora->save();
-       
-        return view('horarios.index');
 
+        return view('horarios.index');
     }
 
     /**
@@ -102,7 +134,7 @@ class HorarioController extends Controller
      */
     public function edit($id)
     {
-       return view('horarios.edit')->with(['horario'=>Horario::find($id), 'users'=>User::all()]);
+        return view('horarios.edit')->with(['horario' => Horario::find($id), 'users' => User::all()]);
     }
 
     /**
@@ -114,14 +146,14 @@ class HorarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $hora=Horario::find($id);
-        $hora->user_id=$request->get('nombreForm');
-        $hora->fecha=$request->get('fechaForm');
-        $hora->dia=$request->get('diaForm');
-        $hora->turno=$request->get('turnoForm');
+
+        $hora = Horario::find($id);
+        $hora->user_id = $request->get('nombreForm');
+        $hora->fecha = $request->get('fechaForm');
+        $hora->dia = $request->get('diaForm');
+        $hora->turno = $request->get('turnoForm');
         $hora->update();
-       
+
         return view('horarios.index');
     }
 
@@ -133,7 +165,7 @@ class HorarioController extends Controller
      */
     public function destroy($id)
     {
-        $hora=Horario::findOrFail($id);
+        $hora = Horario::findOrFail($id);
 
         $hora->delete();
         return view('horarios.index');
