@@ -113,7 +113,7 @@
     </div>
     <div class="footer">
         <p class="copy text-center"><a href="https://github.com/cyberwichi">Cyberwichi 2019</a>   </p>
-        <p class="copy text-center"><a href="https://github.com/cyberwichi/barreroControl">Proyecto barreroControl 0.2.1</a>   </p>
+        <p class="copy text-center"><a href="https://github.com/cyberwichi/barreroControl">Proyecto barreroControl 0.3.1</a>   </p>
 
 
     </div>

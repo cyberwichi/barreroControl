@@ -2,32 +2,79 @@
 
 
 @section('content')
-<div class="container">
-        
 
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<div class="container">
+
 
     @if (auth()->check())
-   
-    
     @if (auth()->user()->hasRole('admin'))
     <div class="row justify-content-center mb-3">
-        <div class="col-md-8">
+        <div class="col-md-12 col-sm-2">
             <div class="card text-center">
-                <div class="card-header ">Hola ¿como estamos?<br><strong>{{auth()->user()->name}}</strong></div>
+                <div class="card-header ">Menu de Horas<br><strong> Accede como {{auth()->user()->name}}</strong><br>
+                    <strong>
+                      
+                        <div class="form-group">
+
+                                <?php
+                                    $diaSemana=['Lunes','Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado','Domingo'];
+                                    $fecha = date_create();
+                                    $año=2019;
+                                     
+                                   
+                                ?>
+    
+    
+                                <label for="exampleFormControlSelect1">Seleccionar Semana</label>
+                                <select class="form-control" id="exampleFormControlSelect11" name="fechaForm">
+                                    @for ($i = 1; $i <=53 ; $i++) <option value="{{$i}}" @if ($i==date('W')) selected
+                                        @endif>Semana {{$i}} inicio 
+                                    <?php
+                                    date_isodate_set($fecha, $año, $i);
+                                    echo date_format($fecha, 'd-m-Y') ;
+                                    
+                                    ?>
+                                    
+                                    </option>
+                                        @endfor
+                                </select>
+                            </div>
+                    </strong>
+                    <button id="btnHorario2" class="btn btn-primary">Ver</button>
+
+                </div>
 
                 <div class="card-body ">
+                    
+                        <div class="form-group">
+
+                            
+                               
 
 
-                    <a href="/horarios"><button type="submit" class="btn btn-primary ">HORARIOS</button></a>
-                    <a href="/users"><button type="submit" class="btn btn-primary ">EMPLEADOS</button></a>
-                    <a href="/pepes"><button type="submit" class="btn btn-primary">HORAS EMPLEADOS</button></a>
-                    <a href=""><button type="submit" class="btn btn-primary">LIQUIDAR HORAS</button></a>
+                          
+                        </div>
+                   
+
+
+
+
+
+
+
 
                 </div>
             </div>
+
         </div>
+
+
     </div>
+
 
 
 
@@ -35,123 +82,16 @@
 
 
     @else
-    <div class="row justify-content-center mb-3">
-        <div class="col-md-8">
-            <div class="card text-center">
-                <div class="card-header ">Hola ¿como estamos?<br><strong>{{auth()->user()->name}}</strong></div>
 
-                <div class="card-body">
-
-
-                <form action="user/{{auth()->user()->id}}/inicio" method="post" @if(session('status')=='Ok turno iniciado') hidden @endif>
-
-                        <input type="datetime" name="datetimeInicio" id="datetimeInicio" value="{{date("Y-m-d H:i")}}"
-                            autocomplete>
-                        <button class="btn btn-primary" type="submit">Inicio de jornada</button>
-                        
-
-                    </form>
-                    <form action="user/{{auth()->user()->id}}/final" method="post" class="mt-3">
-
-                        <input type="datetime" name="datetimeFinal" id="datetimeFinal"
-                            value="{{date("Y-m-d H:i")}}" autocomplete>
-                        <button class="btn btn-primary" type="submit">Final de jornada</button>
-
-                    </form>
-<h2>EN CONSTRUCCION</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center mb-3">
-        <div class="col-md-8">
-            <div class="card text-center">
-                <div class="card-header ">Horarios para....
-                    <br>
-                    <strong>{{auth()->user()->name}}</strong>
-
-
-
-
-                    <div class="card-body">
-                        <div class="form-group">
-                            <?php
-                                    $diaSemana=['Lunes','Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado','Domingo'];
-                                    $fecha = date_create();
-                                    $año=2019;
-                                ?>
-
-                            <label for="exampleFormControlSelect10">Seleccionar Semana</label>
-                            <select class="form-control" id="exampleFormControlSelect10" name="fechaForm">
-                                @for ($i = 1; $i <=53 ; $i++) <option value="{{$i}}" @if ($i==date('W')) selected
-                                    @endif>
-                                    Semana {{$i}} inicio
-                                    <?php
-                                    date_isodate_set($fecha, $año, $i);
-                                    echo date_format($fecha, 'd-m-Y') ;
-                                    ?>
-                                    </option>
-                                    @endfor
-                            </select>
-
-
-
-                        </div>
-                        <button id="btnHorario" class="btn btn-primary">Ver</button>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    <h1>no puedes estar aqui</h1>
     @endif
     @endif
-    <div class="row justify-content-center mb-3">
-            <div class="col-md-8">
-                <div class="card text-center">
-                    <div class="card-header ">Noticias Y otras cosas</strong></div>
-    
-                    <div class="card-body">
-    
-    
-                        <section>
-                            <h2>Noticion la Vane...<br> se nos casa</h2>
-                            <h5>Al parecer ha dado un buen braguetazo</h5>
-                            <p>Segun fuentes bien informadas la Vane se nos casa , ademas de lujo el con un monton de duros
-                                y con mas años que Matusalen. Como no podia ser menos ella ya espera su primer hijo fruto de este amor tan puro que siente...que
-                                arte loca.... </p>
-    
-                        </section>
-                        <section>
-                                <h2>Escasean las pirulas<br> la Nina histérica </h2>
-                                <h5>Dicen haberla visto buscando por las esquinas</h5>
-                                <p>Pos eso escasez de pirulas de las que toma la Nina asi que habrá que aguantarla una mijita mas que de costumbre hasta que pase la mala racha o le salgan tetas....</p>
-        
-                        </section>
-                        <section>
-                            <h2>Manias de la gente</h2>
-                            <h5>El personal esta fatal de lo suyo</h5>
-                            <p>Se ve a gente chuperreteando los baños del Club....¿cual es el misterio?</p>
-    
-                        </section>
-    
-    
-    
-    
-    
-                    </div>
-                </div>
-            </div>
-        </div>
-    <div class="modal fade"  id="horarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade"  id="horarioModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div style="" class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Horario para {{auth()->user()->name}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Horario para {{$user->name}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -218,12 +158,12 @@
         </div>
     </div>
     <script>
-        var btnHora=document.getElementById('btnHorario');
-            $('#btnHorario').on('click', function(){
-                var sem=document.getElementById('exampleFormControlSelect10');
+        var btnHora=document.getElementById('btnHorario2');
+            $('#btnHorario2').on('click', function(){
+                var sem=document.getElementById('exampleFormControlSelect11');
                 var seman=sem.options[sem.selectedIndex].value;
                 $.ajax({
-                    url: '/api/user/'+{{auth()->user()->id}}+'/semana/'+seman,
+                    url: '/api/user/'+{{$user->id}}+'/semana/'+seman,
                     success: function(respuesta) {
                         
                        if (respuesta.length>0){
@@ -258,7 +198,7 @@
                               $('#'+turno).css('background-color','#0f0'); 
                            });
                         
-                            $('#horarioModal').modal('show');
+                            $('#horarioModal2').modal('show');
                             
                        } else{
                         alert( 'error sin turnos esta semana');
@@ -272,7 +212,7 @@
             });
 
 
-            $('#horarioModal').on('hidden.bs.modal', function (e) {
+            $('#horarioModal2').on('hidden.bs.modal', function (e) {
                 for (let index =11; index < 18; index++) {
                 $('#'+index).css('background-color','#999fff');             
                 $('#'+(index+10)).css('background-color','#999fff'); 
@@ -285,7 +225,8 @@
             
 
     </script>
-  
-   
-</div>
-@endsection
+
+
+
+
+    @endsection

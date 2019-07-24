@@ -5,12 +5,28 @@ namespace App\Http\Controllers;
 use App\Horario;
 use App\User;
 use App\Ficha;
+use App\Role;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
 
 class HorarioController extends Controller
 {
+    public function horasUsuarios(Request $request)
+    {
+      
+        $user=User::find($request->nombreForm);
+        $horas=Horario::where('user_id', $request->nombreForm)->get();
+        $fichas=Ficha::where('user_id', $request->nombreForm)->get();
+
+        return view('horarios.estadisticashoras', compact('user', 'fichas', 'horas'));
+    }
+    public function consultaHoras()
+    {
+        $nams = User::get();
+        return view('horarios.menuhoras')->with('users', $nams);
+    }
+
     public function miHorario($id, $sem, Response $response)
     {
 
@@ -25,30 +41,30 @@ class HorarioController extends Controller
     public function inicioMiHorario($id, Request $datetimeInicio)
     {
 
-        
-            $nam = new Ficha;
-            $nam->user_id = $id;      
-            $pepe= date($datetimeInicio->datetimeInicio);            
-            $nam->toque = $pepe;
-            $nam->tipo = "inicio";
-            $nam->save();
-            $datetimeInicio->session()->flash("status", 'Ok turno iniciado');
+
+        $nam = new Ficha;
+        $nam->user_id = $id;
+        $pepe = date($datetimeInicio->datetimeInicio);
+        $nam->toque = $pepe;
+        $nam->tipo = "inicio";
+        $nam->save();
+        $datetimeInicio->session()->flash("status", 'Ok turno iniciado');
 
 
-            
+
 
         return redirect()->route('fichar')->with($datetimeInicio->session()->get("status"));
     }
     public function finalMiHorario($id, Request $datetimeInicio)
     {
         $nam = new Ficha;
-        $nam->user_id = $id;      
-        $pepe= date($datetimeInicio->datetimeFinal);            
+        $nam->user_id = $id;
+        $pepe = date($datetimeInicio->datetimeFinal);
         $nam->toque = $pepe;
         $nam->tipo = "final";
         $nam->save();
-                    
-   
+
+
 
         return redirect()->route('fichar')->with('status', '');
     }
@@ -84,7 +100,7 @@ class HorarioController extends Controller
                 ->make(true);
         }
 
-        return view('horarios.index')->with(['status'=> 'holaaaa']);
+        return view('horarios.index')->with(['status' => 'holaaaa']);
     }
 
     /**

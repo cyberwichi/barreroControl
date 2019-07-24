@@ -54,6 +54,8 @@
                             <label for="exampleFormControlSelect3">Seleccionar Empleado</label>
                             <select class="form-control" id="exampleFormControlSelect3" name="nombreForm">
                                 @foreach ($users as $user )
+                                @continue(!$user->hasRole('user'))
+
                                 <option value="{{$user->id}}">{{$user->name}}</option>
 
 

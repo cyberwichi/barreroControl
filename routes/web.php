@@ -18,12 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 Route::post('/user/{id}/inicio/', 'HorarioController@inicioMiHorario');
 Route::post('/user/{id}/final/', 'HorarioController@finalMiHorario');
-
+Route::get('/pepes', 'HorarioController@consultahoras')->name('horarios.horasUsuarios');
+Route::post('/pepes2', 'HorarioController@horasUsuarios')->name('horarios.consulta'); 
 
 Route::get('/fichar', 'HomeController@fichar')->name('fichar');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/users', 'UserController' , ['except' => ['show', 'create', 'store']]);
+Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
+
+
 Route::resource('/horarios', 'HorarioController');
 Route::get('/turnodelete/{id}', 'HorarioController@destroy')->name('horario.delete');
 Route::get('/userdelete/{id}', 'UserController@destroy')->name('user.delete');
