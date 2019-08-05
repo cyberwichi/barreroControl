@@ -15,7 +15,7 @@
     <div class="row justify-content-center mb-3">
         <div class="col-md-12 col-sm-2">
             <div class="card text-center">
-                <div class="card-header ">Menu de Horas<br><strong> Accede como {{auth()->user()->name}}</strong><br>
+                <div class="card-header ">Menu de Horas Fichadas<br><strong> Accede como {{auth()->user()->name}}</strong><br>
                     <strong>
                         Semana Actual {{date('W')}}
                     </strong>
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="card-body ">
-                    <form action="{{route('horarios.consulta')}} " method="POST">
+                    <form action="{{route('horarios.consultaFichas')}} " method="POST">
 
                         <div class="form-group">
                             @csrf

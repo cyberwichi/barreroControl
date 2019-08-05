@@ -19,7 +19,13 @@ Auth::routes();
 Route::post('/user/{id}/inicio/', 'HorarioController@inicioMiHorario');
 Route::post('/user/{id}/final/', 'HorarioController@finalMiHorario');
 Route::get('/pepes', 'HorarioController@consultahoras')->name('horarios.horasUsuarios');
-Route::post('/pepes2', 'HorarioController@horasUsuarios')->name('horarios.consulta'); 
+Route::post('/pepes2', 'HorarioController@horasUsuarios')->name('horarios.consulta');
+Route::post('/pepes4', 'HorarioController@fichasUsuarios')->name('horarios.consultaFichas');
+Route::get('/pepes3', 'HorarioController@consultaFichas')->name('horarios.fichasUsuarios');
+Route::post('/consultaSemana', 'HorarioController@consultaSemana')->name('horarios.consultaSemana');
+
+
+
 
 Route::get('/fichar', 'HomeController@fichar')->name('fichar');
 Route::get('/home', 'HomeController@index')->name('home');

@@ -16,9 +16,14 @@
         <div class="col-md-12 col-sm-2">
             <div class="card text-center">
                 <div class="card-header ">Menu de Horas<br><strong> Accede como {{auth()->user()->name}}</strong><br>
-                    <strong>
+
+
+                    <strong class="mb-3">
+                    Usuario a consultar: {{$user->name}}
+                    </strong>
+                    <br>
                       
-                        <div class="form-group">
+                        <div class="form-group mt-4">
 
                                 <?php
                                     $diaSemana=['Lunes','Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado','Domingo'];
@@ -43,7 +48,7 @@
                                         @endfor
                                 </select>
                             </div>
-                    </strong>
+                    
                     <button id="btnHorario2" class="btn btn-primary">Ver</button>
 
                 </div>
@@ -99,7 +104,8 @@
                 <div class="modal-body">
                     <style>
                     td, th{
-                        border:1px solid #333;
+                        
+                        border-radius: 50%;
                         min-height: 100%;
                         padding: 0!important;
                         text-align: center;
@@ -123,24 +129,24 @@
                             <tbody>
                                     <tr> 
                                     <td style="display:inline-block; background-color:#999fff" id="" class="col-3">MAÑANA</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="11" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="12" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="13" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="14" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="15" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="16" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="17" class="col-1">.</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="12" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="11" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="13" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="14" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="15" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="16" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="17" class="col-1">No</td>
                                     </tr>
                   
                                 <tr>
                                     <td style="display:inline-block; background-color:#999fff" id="" class="col-3">TARDE</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="21" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="22" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="23" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="24" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="25" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="26" class="col-1">.</td>
-                                    <td style="display:inline-block; background-color:#999fff" id="27" class="col-1">.</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="22" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="21" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="23" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="24" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="25" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="26" class="col-1">No</td>
+                                    <td style="display:inline-block; background-color:#999fff" id="27" class="col-1">No</td>
                                 </tr>
             
             
@@ -169,7 +175,7 @@
                        if (respuesta.length>0){
                            respuesta.forEach(element => {
                                var turno="";
-                               if (element.turno=="mañana"){
+                               if (element.turno=="mañana" || element.turno=="Mañana" ){
                                    turno="1";
                                }else{turno="2"}
 
@@ -196,6 +202,8 @@
                                }                      
 
                               $('#'+turno).css('background-color','#0f0'); 
+                              $('#'+turno).text("Si");
+
                            });
                         
                             $('#horarioModal2').modal('show');

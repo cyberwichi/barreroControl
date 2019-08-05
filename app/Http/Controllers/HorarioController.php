@@ -12,6 +12,29 @@ use Carbon\Carbon;
 
 class HorarioController extends Controller
 {
+    public function consultaFichas()
+    {
+        $nams = User::get();
+        return view('horarios.menufichas')->with('users', $nams);
+    }
+
+    public function consultaSemana(Request $request )
+    {
+        $users = User::get();
+        $horas=Horario::where('fecha', $request->fechaForm)->get();
+        return view('horarios.fichasemana', compact('users', 'horas'));
+
+    }
+    public function fichasUsuarios(Request $request)
+    {
+      
+        $user=User::find($request->nombreForm);
+        $horas=Horario::where('user_id', $request->nombreForm)->get();
+        $fichas=Ficha::where('user_id', $request->nombreForm)->get();
+
+        return view('horarios.estadisticasfichas', compact('user', 'fichas', 'horas'));
+    }
+
     public function horasUsuarios(Request $request)
     {
       

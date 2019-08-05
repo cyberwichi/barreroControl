@@ -39,26 +39,32 @@
                                 @endfor
                         </select>
 
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleFormControlSelect3">Seleccionar Empleado</label>
-                    <select class="form-control" id="exampleFormControlSelect3" name="nombreForm">
-                        @foreach ($users as $user )
-                        <option value="{{$user->id}}" @if($user->id==$horario->user_id) selected @endif>{{$user->name}}
-                        </option>
 
 
-                        @endforeach
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect3">Seleccionar Empleado</label>
+                            <select class="form-control" id="exampleFormControlSelect3" name="nombreForm">
+                                @foreach ($users as $user )
+                                <option value="{{$user->id}}" @if($user->id==$horario->user_id) selected
+                                    @endif>{{$user->name}}
+                                </option>
 
 
-                    </select>
-                </div>
+                                @endforeach
 
-                <div class="form-group">
-                    <label>Turno</label>
-                    <input class="form-control" type="string" name="turnoForm" value="{{$horario->turno}}">
 
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                                <label for="exampleFormControlSelect3">Seleccionar Turno</label>
+                                <select class="form-control" id="exampleFormControlSelect3" name="turnoForm">                                    
+                                    <option value="mañana"  @if($horario->turno=="mañana") selected
+                                            @endif>Mañana</option>
+                                    <option value="tarde" @if($horario->turno=="tarde") selected
+                                            @endif>Tarde</option>
+                                </select>
+                        </div>
                 </div>
 
             </div>
