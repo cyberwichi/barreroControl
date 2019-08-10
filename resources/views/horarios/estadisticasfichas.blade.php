@@ -171,6 +171,7 @@
                             <th>Fecha/Hora Final</th>
                         </thead>
                         <tbody>
+                         {{-- prueba git --}}
                             @foreach ($fichas as $ficha)
                             <tr>
                                 <td>@if ($ficha->tipo=="inicio")
